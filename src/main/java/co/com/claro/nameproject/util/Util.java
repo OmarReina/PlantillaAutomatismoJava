@@ -1,7 +1,7 @@
-package co.com.claro.overtemp.util;
+package co.com.claro.nameproject.util;
 
-import co.com.claro.overtemp.constans.Constans;
-import co.com.claro.overtemp.core.SSHConnector;
+import co.com.claro.nameproject.constans.Constans;
+import co.com.claro.nameproject.core.SSHConnector;
 import com.claro.dbProperties.DBProperties;
 import com.claro.dbProperties.Property;
 import com.claro.logger.ClaroLogger;

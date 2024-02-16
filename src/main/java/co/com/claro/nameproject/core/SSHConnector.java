@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.com.claro.overtemp.core;
+package co.com.claro.nameproject.core;
 
 /**
  *
  * @author User
  */
-import co.com.claro.overtemp.constans.Constans;
-import co.com.claro.overtemp.constans.SSHConstantes;
+import co.com.claro.nameproject.constans.Constans;
+import co.com.claro.nameproject.constans.SSHConstantes;
 import com.claro.logger.ClaroLogger;
 import com.claro.remote.ClientException;
 import com.jcraft.jsch.ChannelShell;

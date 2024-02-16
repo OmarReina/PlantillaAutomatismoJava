@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.com.claro.overtemp.constans;
+package co.com.claro.nameproject.constans;
 
 /**
  *

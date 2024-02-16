@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.com.claro.overtemp.core;
+package co.com.claro.nameproject.core;
 
-import co.com.claro.overtemp.util.Util;
+import co.com.claro.nameproject.util.Util;
 import com.claro.logger.ClaroLogger;
 import java.io.File;
 import java.io.FileInputStream;

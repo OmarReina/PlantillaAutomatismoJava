@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.com.claro.overtemp;
+package co.com.claro.nameproject;
 
-import co.com.claro.overtemp.constans.Constans;
-import co.com.claro.overtemp.core.AppFiles;
-import co.com.claro.overtemp.core.RoutineProperties;
-import co.com.claro.overtemp.core.BuildVersion;
-import co.com.claro.overtemp.util.Util;
+import co.com.claro.nameproject.constans.Log4jConstans;
+import co.com.claro.nameproject.constans.Constans;
+import co.com.claro.nameproject.core.AppFiles;
+import co.com.claro.nameproject.core.RoutineProperties;
+import co.com.claro.nameproject.core.BuildVersion;
+import co.com.claro.nameproject.util.Util;
 import com.claro.logger.ClaroLogger;
 
 /**
@@ -27,7 +28,7 @@ public class Launcher {
         long timeIni = System.currentTimeMillis();
         try {
             Util.deleteFile(Constans.LOG);
-            ClaroLogger.infoProgrammerLog(String.format(Constans.LOG4J_INICIO_METODO, new Object() {
+            ClaroLogger.infoProgrammerLog(String.format(Log4jConstans.LOG4J_INICIO_METODO, new Object() {
             }.getClass().getEnclosingMethod().getName()));
 
             /**
@@ -45,9 +46,9 @@ public class Launcher {
                  */
                 ClaroLogger.infoProgrammerLog("Inicia proceso automatizado");
                 Rutina rutina = new Rutina();
-                rutina.loadFiles();
-                rutina.calculateOverTemp();
-                rutina.executeCaseOneOverTemp();
+//                rutina.loadFiles();
+//                rutina.calculateOverTemp();
+//                rutina.executeCaseOneOverTemp();
                 /**
                  * Se registra el evento de cierre de la rutina
                  */
@@ -60,9 +61,9 @@ public class Launcher {
         } finally {
             //se eliminan los directorios temporales antes de finalizar la aplicacion
             AppFiles.deteleFoldersProcess();
-            ClaroLogger.infoProgrammerLog(String.format(Constans.LOG4J_TERMINA_METODO, new Object() {
+            ClaroLogger.infoProgrammerLog(String.format(Log4jConstans.LOG4J_TERMINA_METODO, new Object() {
             }.getClass().getEnclosingMethod().getName()));
-            ClaroLogger.infoProgrammerLog(String.format(Constans.LOG4J_TIEMPO_TRANSACCION, (System.currentTimeMillis() - timeIni)));
+            ClaroLogger.infoProgrammerLog(String.format(Log4jConstans.LOG4J_TIEMPO_TRANSACCION, (System.currentTimeMillis() - timeIni)));
             BuildVersion.init();
             ClaroLogger.infoProgrammerLog("Finaliza automatizacion version: " + BuildVersion.properties.getProperty("build.version") + " Compilacion: " + BuildVersion.properties.getProperty("build.date"));
             Util.moveLogContent();

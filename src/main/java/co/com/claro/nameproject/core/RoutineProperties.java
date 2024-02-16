@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.com.claro.overtemp.core;
+package co.com.claro.nameproject.core;
 
-import co.com.claro.overtemp.constans.Constans;
+import co.com.claro.nameproject.constans.Constans;
 import com.claro.appconfiguration.AppConfig;
 import com.claro.appconfiguration.AppConfigurationRuntimeException;
 
