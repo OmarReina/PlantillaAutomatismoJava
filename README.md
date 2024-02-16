@@ -14,7 +14,7 @@ clases y metodos que se implementan en este proyecto, las dependencias son:
     * plantillaAutomatismo
 
 # Editar las constantes en el archivos Constans.java, para que el resto de codigo las tome como parametros de configuracion 
-# Prestablesidos, .
+# Prestablesidos
     VERSION     = "DD/MM/AAAA"
     LOG         = "Log[REQ2023_106].log"
     REQ_NAME    = "REQ2023_106"
