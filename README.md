@@ -31,8 +31,8 @@ En el archivo **pom.xml**, es necesario modificar los tags <artifactId> y <name>
 
 
 ```xml
-    <artifactId>REQ_year_number</artifactId> 
-    <name>REQ_year_number</name>
+<artifactId>REQ_year_number</artifactId> 
+<name>REQ_year_number</name>
 ```
 
 Además, se debe modificar la propiedad <buildVersion>, la cual corresponde al valor de la versión compilada del log.
