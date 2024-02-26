@@ -1,47 +1,74 @@
-# PlantillaAutomatismoJava
-Este proyecto contiene una plantilla base con funciones comunes que se podran reutilizar en los automatismo java
 
-# Recomendacion
-Para mejor comprencion de esta plantilla se recomienda estudiar las dependenias
-las cuales son otros proyectos que se han incorporado a esta plantilla, y contienen
-clases y metodos que se implementan en este proyecto, las dependencias son:
+# Fuentes
 
-    * AppConfiguration
-    * Email
-    * RemoteConnection
-    * Incident-ws
-    * Logger 
-    * plantillaAutomatismo
+[Plantilla GitHub](https://github.com/OmarReina/PlantillaAutomatismoJava.git),
+[Repositorio automatismos documentación SVN](https://10.67.106.110:8443/svn/documentacion/trunk/SRS/Procesos),
+[Repositorio automatismos documentación Fuentes](https://10.67.106.110:8443/svn/Automatismos/Fuentes),
+[Repositorio components](https://10.67.106.110:8443/!/#Componentes/view/head/trunk/Fuentes/Components)
 
-# Editar las constantes en el archivos Constans.java, para que el resto de codigo las tome como parametros de configuracion 
-# Prestablesidos
-    VERSION     = "DD/MM/AAAA"
-    LOG         = "Log[REQ2023_106].log"
-    REQ_NAME    = "REQ2023_106"
+# Recomendaciones
 
-# Explicacion de los paquetes y archivos 
-Antes de comenzar hacer un desarrollo en esta plantilla temnga en cuenta lo siguiente:
+Para una mejor comprensión de esta plantilla, se recomienda estudiar las dependencias asociadas. Estas dependencias son otros proyectos que se han incorporado a esta plantilla y contienen clases y métodos que se implementan en este proyecto. Las dependencias son:
 
-    1. Sustituiremos la palabre: (nameproject) en todos los paquetes, por el nombre del proyecto que trabajaremos, ya que (nameproject), esta por defecto.
-    2. Paquete nameproject
-        En este paquete tendremos dos archivos el de Launcher y Rutinas:
-        Launcher: Sera nuestro archivo que inicie la automatizacion, es el arranque
-        Rutina: Aca ira toda la logica de negocio para automatizar
-    3. Paquete constants
-        Contiene varios ficheros los cuales tienen dentro las constantes mas usadas para loa automatismos de Claro, pero se destina particularmente 
-        el archivo Constants, para introducir las constantes de negocios que se requieran usar.
-        Los demas archivos con variables estan por la frecuencia de uso de esta variables en los proyectos de automatizacion si considera necesario puede eliminar los archivos que no requiera.
-    4. Paquete Core
-        Estos archivos no deben ser modificados en ellos se encuentra los archivos que contine la logica que se usa por lo general para hacer los automatismos de claro
-        En caso de anexar una nueva funcionalidad al Core, asegurese de subir la misma al repositorio de plantilla para que los demas programadores puedan hacer uso de ella
-    5. Paquete DTO
-        En caso de necesitarse se tiene esta paquete para poder tener la informacion en local y poderla usar para generar archivos en PDF o Excel, o para otro uso que lo requiera
-    6. Paquete enums
-        Contiene un archivo en el cual hay codigos para regular las cabeceras de XML de los diferentes servicios. 
-        En caso de anexar nuevas informacion de cabeceras asegurese de subir al repositorio de plantillas.
-    7. Paquete Util
-        Contine un archivo el cual se programan utilidades necesarias para los desarrallos, este archivo tampoco debe ser borrado.
-        En caso de anexar nuevas funcionalidades asegurece de subirlas al repositorio de plantilla
-    9. Paquete client
-        Este paquete contiene archivos para los consumos de SOAP o REST que se requiera consumir.
-        cabe destacar que este archivo si puede ser modificado y debe adaptarlo al consumo que se requiera
+ - RemoteConnections
+ - AppConfiguration
+ - Email
+ - ExcelSpreadsheets
+ - Hitss
+ - Incident-ws
+ - Logger
+ - Processor
+
+Todas estas están asociadas al artefacto **Components** y deben ser compiladas previamente para que puedan crearse las bibliotecas en Maven.
+
+# Modificaciones iniciales
+
+En el archivo **pom.xml**, es necesario modificar los tags <artifactId> y <name> por el valor correspondiente al REQ.
+
+
+```xml
+    <artifactId>REQ_year_number</artifactId> 
+    <name>REQ_year_number</name>
+```
+
+Además, se debe modificar la propiedad <buildVersion>, la cual corresponde al valor de la versión compilada del log.
+
+```xml
+<buildVersion>1.2.3</buildVersion>
+```
+    1. Indica que es la versión principal del software.
+    2. Indica que se han realizado cambios menores en la funcionalidad del software, como la corrección de errores o la mejora del rendimiento.
+    3. Indica que se han realizado pequeñas mejoras en la funcionalidad del software o correcciones de errores.
+
+# Explicación de los paquetes y archivos
+Antes de comenzar el desarrollo en esta plantilla, tenga en cuenta lo siguiente:
+```
+Sustitución de la palabra (nameproject): En todos los paquetes, se reemplazará la palabra (nameproject) por el nombre del proyecto en el que se está trabajando, ya que (nameproject) es el valor por defecto.
+```
+### Paquete nameproject:
+###### En este paquete, encontrará dos archivos: Launcher y Rutinas.
+###### Launcher: Este archivo será nuestro punto de inicio para la automatización, es decir, el arranque.
+###### Rutina: Aquí se colocará toda la lógica de negocio para la automatización.
+
+### Paquete constants:
+###### Contiene varios archivos que contienen las constantes más utilizadas para los automatismos de Claro.
+###### Se destaca particularmente el archivo Constants, donde se introducen las constantes de negocios necesarias.
+###### Los demás archivos con variables se organizan según la frecuencia de uso en los proyectos de automatización. Si es necesario, puede eliminar los archivos que no se requieran.
+
+### Paquete Core:
+Estos archivos no deben ser modificados, ya que contienen la lógica utilizada comúnmente para realizar los automatismos de Claro.
+En caso de añadir una nueva funcionalidad al Core, asegúrese de subirla al repositorio de la plantilla para que otros programadores puedan hacer uso de ella.
+
+### Paquete DTO:
+Este paquete se utiliza para almacenar los DTO generalmente para el tratamiendo de datos de los informes o uso necesario.
+
+### Paquete enums:
+Archivos que definen un conjunto de constantes relacionadas. Se puede pensar en él como una lista finita de valores posibles para una variable.
+
+### Paquete Util:
+Contiene un archivo donde se programan utilidades necesarias para el desarrollo. Este archivo tampoco debe ser borrado.
+En caso de añadir nuevas funcionalidades y que estos metodos sean genericos, asegúrese de subirlas al repositorio de la plantilla.
+
+### Paquete client:
+Este paquete contiene el cliente para el consumo de servicios SOAP o REST que se requieran.
+Es importante destacar que este archivo puede ser modificado y debe ser adaptado al consumo necesario.
