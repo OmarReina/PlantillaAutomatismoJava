@@ -1,4 +1,8 @@
 
+# Plantilla Automatismo Java
+
+Este proyecto cuenta con una plantilla base que incluye funciones comunes que pueden ser reutilizadas en los automatismos Java.
+
 # Fuentes
 
 [Plantilla GitHub](https://github.com/OmarReina/PlantillaAutomatismoJava.git),
@@ -36,9 +40,10 @@ Además, se debe modificar la propiedad <buildVersion>, la cual corresponde al v
 ```xml
 <buildVersion>1.2.3</buildVersion>
 ```
-    1. Indica que es la versión principal del software.
-    2. Indica que se han realizado cambios menores en la funcionalidad del software, como la corrección de errores o la mejora del rendimiento.
-    3. Indica que se han realizado pequeñas mejoras en la funcionalidad del software o correcciones de errores.
+
+1. Indica que es la versión principal del software.
+2. Indica que se han realizado cambios menores en la funcionalidad del software, como la corrección de errores o la mejora del rendimiento.
+3. Indica que se han realizado pequeñas mejoras en la funcionalidad del software o correcciones de errores.
 
 # Explicación de los paquetes y archivos
 Antes de comenzar el desarrollo en esta plantilla, tenga en cuenta lo siguiente:
@@ -46,14 +51,14 @@ Antes de comenzar el desarrollo en esta plantilla, tenga en cuenta lo siguiente:
 Sustitución de la palabra (nameproject): En todos los paquetes, se reemplazará la palabra (nameproject) por el nombre del proyecto en el que se está trabajando, ya que (nameproject) es el valor por defecto.
 ```
 ### Paquete nameproject:
-###### En este paquete, encontrará dos archivos: Launcher y Rutinas.
-###### Launcher: Este archivo será nuestro punto de inicio para la automatización, es decir, el arranque.
-###### Rutina: Aquí se colocará toda la lógica de negocio para la automatización.
+En este paquete, encontrará dos archivos: Launcher y Rutinas.
+Launcher: Este archivo será nuestro punto de inicio para la automatización, es decir, el arranque.
+Rutina: Aquí se colocará toda la lógica de negocio para la automatización.
 
 ### Paquete constants:
-###### Contiene varios archivos que contienen las constantes más utilizadas para los automatismos de Claro.
-###### Se destaca particularmente el archivo Constants, donde se introducen las constantes de negocios necesarias.
-###### Los demás archivos con variables se organizan según la frecuencia de uso en los proyectos de automatización. Si es necesario, puede eliminar los archivos que no se requieran.
+Contiene varios archivos que contienen las constantes más utilizadas para los automatismos de Claro.
+Se destaca particularmente el archivo Constants, donde se introducen las constantes de negocios necesarias.
+Los demás archivos con variables se organizan según la frecuencia de uso en los proyectos de automatización. Si es necesario, puede eliminar los archivos que no se requieran.
 
 ### Paquete Core:
 Estos archivos no deben ser modificados, ya que contienen la lógica utilizada comúnmente para realizar los automatismos de Claro.
