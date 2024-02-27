@@ -9,8 +9,8 @@ package co.com.claro.nameproject.core;
  *
  * @author User
  */
-import co.com.claro.nameproject.constans.Constans;
-import co.com.claro.nameproject.constans.SSHConstantes;
+import co.com.claro.nameproject.constans.SSHConstans;
+import co.com.claro.nameproject.constans.SSHConstans;
 import com.claro.logger.ClaroLogger;
 import com.claro.remote.ClientException;
 import com.jcraft.jsch.ChannelShell;
@@ -34,7 +34,7 @@ import java.util.Vector;
 /**
  * Clase encargada de establecer conexión y ejecutar comandos SSH.
  */
-public class SSHConnector extends SSHConstantes {
+public class SSHConnector extends SSHConstans {
 
     /**
      * Sesión SSH establecida.
@@ -400,10 +400,10 @@ public class SSHConnector extends SSHConstantes {
         try {
             // Crear la carpeta de historico si no existe
             channelSftp.connect();
-            createFolderIfNotExists(channelSftp, path + Constans.HISTORICO_PATH);
+            createFolderIfNotExists(channelSftp, path + SSHConstans.SERVER_SSH_HISTORICO_PATH);
 
             // Crear la carpeta con la fecha de hoy si no existe
-            String todayFolderPath = path + Constans.HISTORICO_PATH + "/" + Constans.HISTORICO_PATH_DAY;
+            String todayFolderPath = path + SSHConstans.SERVER_SSH_HISTORICO_PATH + "/" + SSHConstans.SERVER_SSH_HISTORICO_PATH;
             createFolderIfNotExists(channelSftp, todayFolderPath);
 
             File file = new File(fileName);

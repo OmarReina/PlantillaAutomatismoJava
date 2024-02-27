@@ -14,43 +14,44 @@ import java.util.Locale;
 
 /**
  *
- * @author <a href="mailto:betancourtks@globalhitss.com">Sebastian Betancourt</a>
+ * @author <a href="mailto:betancourtks@globalhitss.com">Sebastian
+ * Betancourt</a>
  */
 public class Constans {
-    
-    /**
-     * Constante que define el nombre del requerimiento
-     */
-    public static final String REQ_NAME = "REQ2023_106 ";
-    
+
     /**
      * Constante para obtener la fecha del dia.
      */
     public static Date FECHA_ACTUAL = new Date();
-    
+
     /**
      * Constantes formato de fechas
      */
     public static final DateTimeFormatter FORMATTER_YYYY_MM_DD_HHMM = DateTimeFormatter.ofPattern("yyyy-MM-dd_HHmm");
     public static final DateTimeFormatter FORMATTER_YYYYMMDD_HHMM = DateTimeFormatter.ofPattern("yyyyMMdd_HHmm");
     public static final DateTimeFormatter FORMATTER_YYYYMMDD = DateTimeFormatter.ofPattern("yyyyMMdd");
-        
+
+    /**
+     * Constante que define el nombre y log del requerimiento
+     */
+    public static final String REQ_NAME = "REQ2024_123";
+    public static final String LOG = "Log[" + REQ_NAME + "].log";
+    public static final String LOG_SAVE = REQ_NAME + new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime().format(FORMATTER_YYYY_MM_DD_HHMM) + ".log";
+
     /**
      * Constante que define el nombre consultar propiedades del req
      */
     public static final String TAG_EQUIPMENT_HW_ENVIRONMENT = "equipment.HwEnvironment";
-    
+
     /**
      * Nombre del archivo historico
      */
     public static final String TXT_NOMBRE_HISTORICO = "HistoricoOverTemp_" + new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime().format(FORMATTER_YYYYMMDD_HHMM);
-    public static final String LOG_SOAP = REQ_NAME + new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime().format(FORMATTER_YYYY_MM_DD_HHMM)+".log";
 
-    /**
-     * Constantes generales estan pueden cambiar segun el requerimiento,
-     * en este caso hay ejemplo de requerimiento REQ_NAME
-     */
-    public static final String VERSION = "13/AGOSTO/2023";
-    public static final String LOG = "Log[REQ2023_106].log";
-   
+    public static final String UNDERSCORE = "_";
+    public static final String SINGLE_QUOTE = "'";
+    public static final String SINGLE_QUOTE_AND_COMMA = "',";
+    public static final String VACIO = "";
+    public static final String EXTENSION_TXT = ".txt";
+    public static final String EXTENSION_XLSX = ".xlsx";
 }

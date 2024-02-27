@@ -8,8 +8,8 @@ package co.com.claro.nameproject.constans;
  *
  * @author yepezj
  */
-public class MaximoConstans {
-    
+public class ServiceSoapConstans {
+
     /**
      * Constantes para Uso de Maximo
      */
@@ -39,9 +39,10 @@ public class MaximoConstans {
     public static final String MAXIMO_METHOD_WS_CREATE_OT = "CreateCL_CREATE_OT";
     public static final String MAXIMO_METHOD_WS_ASSOCIATE_OT = "SyncCL_WOTICKET";
     public static final String MAXIMO_METHOD_WS_CREATE_TASK = "CreateWOACTIVITY";
-    
+
     public static final String MAXIMO_ELEMENT_INCIDENT = "INCIDENT";
     public static final String MAXIMO_ELEMENT_WORK_ORDER = "WORK_ORDER";
     public static final String MAXIMO_ELEMENT_TASK = "TASK";
-    
+    public static final Integer SECONDS_TIMEOUT_SOAP_DEFAULT = 5;
+
 }

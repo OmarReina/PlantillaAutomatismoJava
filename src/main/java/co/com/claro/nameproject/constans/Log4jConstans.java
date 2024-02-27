@@ -25,6 +25,5 @@ public class Log4jConstans {
     public static final String LOG4J_PARAMETROS_ENTRADA = "-- PARAMETROS DE ENTRADA -- : %s";
     public static final String LOG4J_PARAMETROS_SALIDA = "-- PARAMETROS DE SALIDA -- : %s";
     public static final String LOG4J_VARIABLE = "-- VARIABLE -- : %s";
-    public static final Integer SECONDS_TIMEOUT_SOAP_DEFAULT = 5;
     
 }

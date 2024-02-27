@@ -1,31 +1,33 @@
 package co.com.claro.nameproject.util;
 
 import co.com.claro.nameproject.constans.Constans;
+import co.com.claro.nameproject.constans.ServiceSoapConstans;
+import co.com.claro.nameproject.core.RoutineProperties;
 import co.com.claro.nameproject.core.SSHConnector;
+import co.com.claro.nameproject.enums.ERequestSOAP;
+import co.com.claro.nameproject.ws.soap.client.ConsumoGenericoSoap;
 import com.claro.dbProperties.DBProperties;
 import com.claro.dbProperties.Property;
 import com.claro.logger.ClaroLogger;
 import com.claro.sendMessages.mail.MailMessage;
 import com.claro.sendMessages.mail.SessionFactory;
 import com.google.gson.Gson;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.mail.Session;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -488,7 +490,7 @@ public class Util {
         Path sourcePath = Paths.get(Constans.LOG);
 
         // Ruta del archivo de destino para el log movido
-        Path destinationPath = Paths.get("logs/" + Constans.LOG_SOAP);
+        Path destinationPath = Paths.get("logs/" + Constans.LOG_SAVE);
 
         try {
             // Verificar si el archivo de origen existe
@@ -517,6 +519,69 @@ public class Util {
                 ClaroLogger.errorProgrammerLog("Method: " + element.getMethodName());
                 ClaroLogger.errorProgrammerLog("Line: " + element.getLineNumber());
             };
+        }
+    }
+
+    /**
+     *
+     * Crea un incidente en el sistema Maximo y devuelve un mapa con los
+     * elementos creados (incidente, orden de trabajo y tarea).
+     *
+     * @param urgency la urgencia del incidente.
+     * @param impact el impacto del incidente.
+     * @param internalpriority la prioridad interna del incidente.
+     * @param ownergroup el grupo propietario del incidente.
+     * @param classstructureid el ID de la estructura de clase del incidente.
+     * @param description la descripciÃ³n del incidente.
+     * @param longDescription la descripciÃ³n larga del incidente.
+     * @param cinum el nÃºmero de CI.
+     * @param location la ubicaciÃ³n del incidente.
+     * @return un mapa con los elementos creados (incidente, orden de trabajo y
+     * tarea).
+     * @throws Exception si ocurre algÃºn error durante la ejecuciÃ³n.
+     */
+    public static Map<String, String> createIncidentOTAndTaskMaximo(String urgency, String impact, String internalpriority, String ownergroup, String classstructureid, String description, String longDescription, String cinum, String location) throws Exception {
+        try {
+            ClaroLogger.infoProgrammerLog("Inicia proceso de createIncidentMaximo");
+            ConsumoGenericoSoap consumoGenericoSoap = new ConsumoGenericoSoap();
+            Integer timeOut = ServiceSoapConstans.SECONDS_TIMEOUT_SOAP_DEFAULT;
+            Map<String, String> maximoMap = new HashMap<>();
+
+            String request;
+            // Crear incidente Maximo
+            request = String.format(ERequestSOAP.CREATE_INCIDENT_MAXIMO.request(),
+                    urgency, impact, internalpriority, ownergroup, classstructureid, description, description + ", " + longDescription, cinum);
+            maximoMap.put(ServiceSoapConstans.MAXIMO_ELEMENT_INCIDENT, consumoGenericoSoap.consumirServicioMaximoSOAP(ServiceSoapConstans.MAXIMO_NAME_WS_CREATE_INCIDENT,
+                    RoutineProperties.getProperties().get(ServiceSoapConstans.MAXIMO_URL_CREATE_INCIDENT).getValue(),
+                    request, ServiceSoapConstans.MAXIMO_METHOD_WS_CREATE_INCIDENT, timeOut, RoutineProperties.getProperties().get(ServiceSoapConstans.MAXIMO_USER).getValue(), RoutineProperties.getProperties().get(ServiceSoapConstans.MAXIMO_PASSWORD).getValue()));
+            // Crear orden de trabajo Maximo
+            request = String.format(ERequestSOAP.CREATE_OT_MAXIMO.request(), internalpriority, classstructureid, description, cinum);
+            maximoMap.put(ServiceSoapConstans.MAXIMO_ELEMENT_WORK_ORDER, consumoGenericoSoap.consumirServicioMaximoSOAP(ServiceSoapConstans.MAXIMO_NAME_WS_CREATE_OT,
+                    RoutineProperties.getProperties().get(ServiceSoapConstans.MAXIMO_URL_CREATE_OT).getValue(),
+                    request, ServiceSoapConstans.MAXIMO_METHOD_WS_CREATE_OT, timeOut, RoutineProperties.getProperties().get(ServiceSoapConstans.MAXIMO_USER).getValue(), RoutineProperties.getProperties().get(ServiceSoapConstans.MAXIMO_PASSWORD).getValue()));
+            // Asociar orden de trabajo al incidente Maximo
+            request = String.format(ERequestSOAP.ASSOCIATE_OT_MAXIMO.request(), maximoMap.get(ServiceSoapConstans.MAXIMO_ELEMENT_INCIDENT), maximoMap.get(ServiceSoapConstans.MAXIMO_ELEMENT_WORK_ORDER), description);
+            consumoGenericoSoap.consumirServicioMaximoSOAP(ServiceSoapConstans.MAXIMO_NAME_WS_ASSOCIATE_OT,
+                    RoutineProperties.getProperties().get(ServiceSoapConstans.MAXIMO_URL_ASSOCIATE_OT).getValue(),
+                    request, ServiceSoapConstans.MAXIMO_METHOD_WS_ASSOCIATE_OT, timeOut, RoutineProperties.getProperties().get(ServiceSoapConstans.MAXIMO_USER).getValue(), RoutineProperties.getProperties().get(ServiceSoapConstans.MAXIMO_PASSWORD).getValue());
+            // Crear tarea Maximo
+            request = String.format(ERequestSOAP.CREATE_TASK_MAXIMO.request(), location, description, internalpriority, maximoMap.get(ServiceSoapConstans.MAXIMO_ELEMENT_INCIDENT), classstructureid, cinum);
+            maximoMap.put(ServiceSoapConstans.MAXIMO_ELEMENT_TASK, consumoGenericoSoap.consumirServicioMaximoSOAP(ServiceSoapConstans.MAXIMO_NAME_WS_CREATE_TASK,
+                    RoutineProperties.getProperties().get(ServiceSoapConstans.MAXIMO_URL_CREATE_TASK).getValue(),
+                    request, ServiceSoapConstans.MAXIMO_METHOD_WS_CREATE_TASK, timeOut, RoutineProperties.getProperties().get(ServiceSoapConstans.MAXIMO_USER).getValue(), RoutineProperties.getProperties().get(ServiceSoapConstans.MAXIMO_PASSWORD).getValue()));
+
+            ClaroLogger.infoProgrammerLog("Finaliza proceso de createIncidentMaximo");
+            return maximoMap;
+        } catch (Exception ex) {
+            // Lanzar una excepciÃ³n general con informaciÃ³n adicional
+            ClaroLogger.errorProgrammerLog(ex.getMessage(), ex);
+            StackTraceElement[] stackTrace = ex.getStackTrace();
+            for (StackTraceElement element : stackTrace) {
+                ClaroLogger.errorProgrammerLog("Class: " + element.getClassName());
+                ClaroLogger.errorProgrammerLog("Method: " + element.getMethodName());
+                ClaroLogger.errorProgrammerLog("Line: " + element.getLineNumber());
+            };
+            return null;
         }
     }
 }

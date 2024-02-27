@@ -9,7 +9,7 @@ package co.com.claro.nameproject.constans;
  *
  * @author Administrator
  */
-public class SSHConstantes {
+public class SSHConstans {
 
     /**
      * Nueva linea en windows CR+LF
@@ -47,4 +47,11 @@ public class SSHConstantes {
     /**
      * Errores de Ejecucion de Comandos
      */
+    
+    
+    
+    public static final String SERVER_SSH_HISTORICO_IP = "server.ssh.HISTORICO.ip";
+    public static final String SERVER_SSH_HISTORICO_USER = "server.ssh.HISTORICO.user";
+    public static final String SERVER_SSH_HISTORICO_PASSW = "server.ssh.HISTORICO.passw";
+    public static final String SERVER_SSH_HISTORICO_PATH = "server.ssh.HISTORICO.path";
 }
